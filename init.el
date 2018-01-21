@@ -1,4 +1,4 @@
-;; load-path を設定
+;; load-path
 (setq load-path (cons "~/.emacs.d/elpa" load-path))
 
 ;; setting of package.el
@@ -170,5 +170,42 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;; git
+;; git-gutter 差分の表示
 (require 'git-gutter-fringe)
+(global-git-gutter-mode 1)
+
+;; ファイル編集時にbufferを再読込
+(global-auto-revert-mode 1)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;; Coding
+;; auto-compete
+(require 'popup)
+(require 'auto-complete-config)
+(global-auto-complete-mode t)
+(ac-config-default)
+
+;;;;; Python
+(require 'python-mode)
+;; yasnippet
+(require 'yasnippet)
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"       ;; personal snippets
+        "~/.emacs.d/elpa/snippets"  ;; official snippet collections
+        ))
+(yas-global-mode 1)
+;; autopep8
+(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+
+
+;;;;; C
+
+
+;;;;; markdown
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
