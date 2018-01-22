@@ -192,6 +192,41 @@ py-autopep8
   (ac-config-default)
   ```
 
+## flymake
+- コード上のエラーや警告を自動で評価してくれる
+  - [こちら](http://hamukazu.com/2014/12/05/setting-emacs-for-python/)の記述を丸々コピーしただけ
+- pyflakesをインストール
+```
+$ pip install pyflakes
+```
+- emacsで`flymake, flymake-cursor, flymake-easy, flymake-python-pyflakes`をインストール
+```
+M-x package-list-packages
+flymake
+flymake-cursor
+flymake-easy
+flymake-python-pyflakes
+
+# init.el
+(require 'tramp-cmds)
+(when (load "flymake" t)
+  (defun flymake-pyflakes-init ()
+     ; Make sure it's not a remote buffer or flymake would not work
+     (when (not (subsetp (list (current-buffer)) (tramp-list-remote-buffers)))
+      (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                         'flymake-create-temp-inplace))
+             (local-file (file-relative-name
+                          temp-file
+                          (file-name-directory buffer-file-name))))
+        (list "pyflakes" (list local-file)))))
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.py\\'" flymake-pyflakes-init)))
+ 
+(add-hook 'python-mode-hook
+          (lambda ()
+            (flymake-mode t)))
+```
+
 
 # 試したいパッケージ等
 - [ここ](http://emacs.rubikitch.com/tag/recommended-packages/)をチェック
@@ -213,7 +248,5 @@ py-autopep8
   - 入力補完
   - companyというパッケージもあるらしい
   - auto-completeは入れてあるが、試したい
-- pyflakes
-  - インストールはしたが利用できず、、、
 - elm-mode
 
