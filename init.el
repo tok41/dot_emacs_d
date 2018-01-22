@@ -1,5 +1,8 @@
 ;; load-path
-(setq load-path (cons "~/.emacs.d/elpa" load-path))
+(let ((default-directory (expand-file-name "~/.emacs.d/elpa")))
+  (add-to-list 'load-path default-directory)
+  (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+            (normal-top-level-add-subdirs-to-load-path)))
 
 ;; setting of package.el
 (require 'package)
@@ -13,7 +16,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;; 日本語入力モード
 ;;Japanese
-(require 'mozc)
+;(require 'mozc)
 (set-language-environment "Japanese")
 (setq default-input-method "japanese-mozc")
 (prefer-coding-system 'utf-8)
@@ -171,6 +174,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;; git
 ;; git-gutter 差分の表示
+(require 'git-gutter)
 (require 'git-gutter-fringe)
 (global-git-gutter-mode 1)
 
@@ -186,8 +190,6 @@
 (global-auto-complete-mode t)
 (ac-config-default)
 
-;;;;; Python
-(require 'python-mode)
 ;; yasnippet
 (require 'yasnippet)
 (setq yas-snippet-dirs
@@ -195,7 +197,18 @@
         "~/.emacs.d/elpa/snippets"  ;; official snippet collections
         ))
 (yas-global-mode 1)
+
+;; diff
+;; コントロール用のバッファを同一フレーム内に表示
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+;; diffのバッファを上下ではなく左右に並べる
+(setq ediff-split-window-function 'split-window-horizontally)
+
+
+;;;;; Python
+(require 'python-mode)
 ;; autopep8
+(require 'py-autopep8)
 (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
 
 

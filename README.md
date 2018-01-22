@@ -1,12 +1,22 @@
 # dot emacs d
 
 # config file
-- ~.emacs、~/.emacs.el、~/.emacs.d/init.elの順番に検索される
+- `~.emacs, ~/.emacs.el, ~/.emacs.d/init.el`の順番に検索される
   - [参考](https://qiita.com/tadsan/items/a2018379ffaadf07a418)
   - どれか一つの設定ファイルしか反映されない
 - gitでフォルダ毎管理すると楽なので、~/.emacs.d/init.elを作成してみる
 
 # 設定
+## load-path
+- 指定ディレクトリ以下のサブディレクトリにパスを通す
+```
+;; load-path
+(let ((default-directory (expand-file-name "~/.emacs.d/elpa")))
+  (add-to-list 'load-path default-directory)
+  (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+            (normal-top-level-add-subdirs-to-load-path)))
+```
+
 ## Color-Thema
 - デフォルトでインストールされているテーマを使う
   - テーマは[このページ](http://aoe-tk.hatenablog.com/entry/20130210/1360506829)などを参考に選ぶ
@@ -29,6 +39,7 @@
   (setq default-input-method "japanese-mozc")
   (prefer-coding-system 'utf-8)
   ```
+
 ## アクティブウィンドウと非アクティブを色分け
 - hiwin.elをインストール
 ```
@@ -43,6 +54,7 @@ hiwin
 (hiwin-activate)
 (set-face-background 'hiwin-face "gray30")
 ```
+
 ## 行番号を左側に表示
 - built-inされているlinum.elを使う
   - 無い場合は、`M-x package-list-packages`でインストールできると思う
@@ -59,6 +71,7 @@ hiwin
 M-x package-list-packages
 golden-ratio
 ```
+
 ## redo
 - redo+をインストール
   - キーバインドは`Ctrl+z`とした
@@ -85,6 +98,7 @@ redo+
 - init.el
 ```
 ;; git-gutter 差分の表示
+(require 'git-gutter)
 (require 'git-gutter-fringe)
 (global-git-gutter-mode 1)
 
@@ -144,6 +158,8 @@ python-mode
 	(yas-global-mode 1)
 	```
 - emacsから`M-x yas-describe-tables`でsnippetの詳細を調べることができる
+- Trouble-Shoot
+  - snippets/go-mode/default でエラーが出る場合があり、強制的に削除
 - 参考（公式）
   - https://github.com/joaotavora/yasnippet
   - https://github.com/AndreaCrotti/yasnippet-snippets
@@ -160,12 +176,13 @@ M-x package-list-packages
 py-autopep8
 
 # init.el
+(require 'py-autopep8)
 (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
 ```
 
 ## auto-complete
 - 入力補完
-  - popupというパッケージが見つからないというエラーが出るが、インストール済みになっていた。一度deleteして再度インストールし直し、popupを明にrequiredで呼び出すことで解決
+  - popupというパッケージが見つからないというエラーが出るが、インストール済みになっていた。一度deleteして再度インストールし直し、popupを明にrequiredで呼び出すことで一応は解決
   ```
   M-x package-list-packages
   auto-compete
@@ -200,3 +217,5 @@ py-autopep8
   - auto-completeは入れてあるが、試したい
 - pyflakes
   - インストールはしたが利用できず、、、
+- elm-mode
+
