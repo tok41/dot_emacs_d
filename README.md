@@ -227,6 +227,23 @@ flymake-python-pyflakes
             (flymake-mode t)))
 ```
 
+## dumb-jump
+- 関数などの定義元に飛べる
+  - [こちら](https://qiita.com/blue0513/items/c0dc35a880170997c3f5#dumb-jump)を丸コピーさせてもらいました
+  - super+d -> 定義にジャンプ
+  - super+shifr+d -> 元の位置に戻る
+```
+M-x package-list-packages
+dumb-jump
+
+# init.el
+(require 'dumb-jump)
+(setq dumb-jump-mode t)
+(setq dumb-jump-use-visible-window nil)
+(define-key global-map [(super d)] 'dumb-jump-go)
+(define-key global-map [(super shift d)] 'dumb-jump-back)
+```
+
 
 # 試したいパッケージ等
 - [ここ](http://emacs.rubikitch.com/tag/recommended-packages/)をチェック

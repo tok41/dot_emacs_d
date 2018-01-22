@@ -198,6 +198,13 @@
         ))
 (yas-global-mode 1)
 
+;; dumb-jump
+(require 'dumb-jump)
+(setq dumb-jump-mode t)
+(setq dumb-jump-use-visible-window nil)
+(define-key global-map [(super d)] 'dumb-jump-go) ;; go-to-definition!
+(define-key global-map [(super shift d)] 'dumb-jump-back)
+
 ;; diff
 ;; コントロール用のバッファを同一フレーム内に表示
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
