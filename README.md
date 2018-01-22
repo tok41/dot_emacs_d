@@ -3,8 +3,8 @@
 # config file
 - `~.emacs, ~/.emacs.el, ~/.emacs.d/init.el`の順番に検索される
   - [参考](https://qiita.com/tadsan/items/a2018379ffaadf07a418)
-  - どれか一つの設定ファイルしか反映されない
-- gitでフォルダ毎管理すると楽なので、~/.emacs.d/init.elを作成してみる
+  - 最初に見つかった設定ファイルが反映される
+- ここではgitでディレクトリ毎管理すると楽なので、`~/.emacs.d/init.el`を作成
 
 # 設定
 ## load-path
@@ -46,8 +46,6 @@
 M-x package-list-packages
 hiwin
 ```
-- .emacs.d/elpa以下にディレクトリが切られ、その下にelファイルが生成されるので、elpa直下にリンクを貼る
-  - 権限の設定とかでわざわざリンクを貼らなくても済むようになる？
 - init.elに記載
 ```
 (require 'hiwin)
