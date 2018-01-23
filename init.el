@@ -16,7 +16,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;; 日本語入力モード
 ;;Japanese
-(require 'mozc)
+;(require 'mozc)
 (set-language-environment "Japanese")
 (setq default-input-method "japanese-mozc")
 (prefer-coding-system 'utf-8)
@@ -211,13 +211,7 @@
 ;; diffのバッファを上下ではなく左右に並べる
 (setq ediff-split-window-function 'split-window-horizontally)
 
-
-;;;;; Python
-(require 'python-mode)
-;; autopep8
-(require 'py-autopep8)
-(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-;; pyflakes
+;; flymake : コードを動的にチェックしてくれる
 (require 'tramp-cmds)
 (when (load "flymake" t)
   (defun flymake-pyflakes-init ()
@@ -231,10 +225,24 @@
         (list "pyflakes" (list local-file)))))
   (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pyflakes-init)))
- 
+;; エラーをミニバッファに表示
+(defun flymake-show-help ()
+  (when (get-char-property (point) 'flymake-overlay)
+	(let ((help (get-char-property (point) 'help-echo)))
+	  (if help (message "%s" help)))))
+(add-hook 'post-command-hook 'flymake-show-help)
+
+
+;;;;; Python
+(require 'python-mode)
+;; autopep8
+(require 'py-autopep8)
+(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+;; pyflakes
 (add-hook 'python-mode-hook
           (lambda ()
             (flymake-mode t)))
+
 
 ;;;;; C
 
