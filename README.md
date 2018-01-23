@@ -245,6 +245,25 @@ dumb-jump
 ```
 
 
+## cmake-mode
+- CMakeLists.txtの編集モード
+  - 便利な使い方は後で調べる
+  - https://cmake.org/Wiki/CMake/Editors/Emacs
+```
+M-x package-list-packages
+cmake-mode
+
+# init.el
+(require 'cmake-mode)
+(setq auto-mode-alist
+	  (append
+	   '(("CMakeLists\\.txt\\'" . cmake-mode))
+	   '(("\\.cmake\\'" . cmake-mode))
+	      auto-mode-alist))
+```
+
+
+
 # 試したいパッケージ等
 - [ここ](http://emacs.rubikitch.com/tag/recommended-packages/)をチェック
 - elscreen

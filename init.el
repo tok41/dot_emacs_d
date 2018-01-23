@@ -233,6 +233,14 @@
 (add-hook 'post-command-hook 'flymake-show-help)
 
 
+;;;;; markdown
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+
 ;;;;; Python
 (require 'python-mode)
 ;; autopep8
@@ -245,12 +253,22 @@
 
 
 ;;;;; C
+;; Cモード
+(require 'cc-mode)
+(add-hook 'c-mode-common-hook
+		  (lambda ()
+			(setq c-default-style "k&r") ;; カーニハン・リッチースタイル
+			(setq indent-tabs-mode nil)  ;; タブは利用しない
+			(setq c-basic-offset 2)      ;; indent は 2 スペース
+			))
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+;; CMake-mode
+(require 'cmake-mode)
+(setq auto-mode-alist
+	  (append
+	   '(("CMakeLists\\.txt\\'" . cmake-mode))
+	   '(("\\.cmake\\'" . cmake-mode))
+	      auto-mode-alist))
 
 
-;;;;; markdown
-(autoload 'markdown-mode "markdown-mode"
-  "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
