@@ -232,6 +232,8 @@ flymake-python-pyflakes
   - [こちら](https://qiita.com/blue0513/items/c0dc35a880170997c3f5#dumb-jump)を丸コピーさせてもらいました
   - super+d -> 定義にジャンプ
   - super+shifr+d -> 元の位置に戻る
+  - [こちら](http://emacs.rubikitch.com/dumb-jump/)を参照すると、ag(silver sercher)を導入して高速化が図れる
+  - また、`.dumbjump`ファイルを用意して、検索ディレクトリを指定することもできる
 ```
 M-x package-list-packages
 dumb-jump

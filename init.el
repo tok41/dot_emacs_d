@@ -72,8 +72,8 @@
 ;;; カーソルの位置が何文字目かを表示する
 (column-number-mode t)
 ;;; 画面の左側に行番号を表示
-(require 'linum)
-(global-linum-mode 1)
+;(require 'linum)
+;(global-linum-mode 1)
 
 ;;; カーソルの位置が何行目かを表示する
 (line-number-mode t)
@@ -149,9 +149,9 @@
 (global-set-key "\C-c\C-r" 'window-resizer)
 
 ;; アクティブウィンドウのサイズを自動調整
-(require 'golden-ratio)
-(golden-ratio-mode 1)
-(add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")
+;(require 'golden-ratio)
+;(golden-ratio-mode 1)
+;(add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")
 
 
 
@@ -269,6 +269,16 @@
 	   '(("CMakeLists\\.txt\\'" . cmake-mode))
 	   '(("\\.cmake\\'" . cmake-mode))
 	      auto-mode-alist))
+;; GDB
+;;; 有用なバッファを開くモード
+(setq gdb-many-windows t)
+;;; 変数の上にマウスカーソルを置くと値を表示
+(add-hook 'gdb-mode-hook '(lambda () (gud-tooltip-mode t)))
+;;; I/O バッファを表示
+(setq gdb-use-separate-io-buffer t)
+;;; t にすると mini buffer に値が表示される
+(setq gud-tooltip-echo-area t)
+
 
 
 
