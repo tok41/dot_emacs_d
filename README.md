@@ -62,6 +62,7 @@ hiwin
 (global-linum-mode 1)
 ```
 - `M-x linum-mode`で表示を消せる
+- emacsの挙動が重たくなる原因の可能性があるので、非表示
 
 ## ウィンドウサイズの自動調整（黄金比）
 - 分割ウィンドウのアクティブウィンドウのサイズをちょうどよく変更してくれる
@@ -69,6 +70,8 @@ hiwin
 M-x package-list-packages
 golden-ratio
 ```
+- GDBモードの際に表示が崩れるので、設定を外す
+  - Cモードの時には使わないような設定を入れるか？
 
 ## redo
 - redo+をインストール
