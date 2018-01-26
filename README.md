@@ -62,6 +62,7 @@ hiwin
 (global-linum-mode 1)
 ```
 - `M-x linum-mode`で表示を消せる
+- emacsの挙動が重たくなる原因の可能性があるので、非表示
 
 ## ウィンドウサイズの自動調整（黄金比）
 - 分割ウィンドウのアクティブウィンドウのサイズをちょうどよく変更してくれる
@@ -69,6 +70,8 @@ hiwin
 M-x package-list-packages
 golden-ratio
 ```
+- GDBモードの際に表示が崩れるので、設定を外す
+  - Cモードの時には使わないような設定を入れるか？
 
 ## redo
 - redo+をインストール
@@ -226,6 +229,44 @@ flymake-python-pyflakes
           (lambda ()
             (flymake-mode t)))
 ```
+
+## dumb-jump
+- 関数などの定義元に飛べる
+  - [こちら](https://qiita.com/blue0513/items/c0dc35a880170997c3f5#dumb-jump)を丸コピーさせてもらいました
+  - super+d -> 定義にジャンプ
+  - super+shifr+d -> 元の位置に戻る
+  - [こちら](http://emacs.rubikitch.com/dumb-jump/)を参照すると、ag(silver sercher)を導入して高速化が図れる
+  - また、`.dumbjump`ファイルを用意して、検索ディレクトリを指定することもできる
+```
+M-x package-list-packages
+dumb-jump
+
+# init.el
+(require 'dumb-jump)
+(setq dumb-jump-mode t)
+(setq dumb-jump-use-visible-window nil)
+(define-key global-map [(super d)] 'dumb-jump-go)
+(define-key global-map [(super shift d)] 'dumb-jump-back)
+```
+
+
+## cmake-mode
+- CMakeLists.txtの編集モード
+  - 便利な使い方は後で調べる
+  - https://cmake.org/Wiki/CMake/Editors/Emacs
+```
+M-x package-list-packages
+cmake-mode
+
+# init.el
+(require 'cmake-mode)
+(setq auto-mode-alist
+	  (append
+	   '(("CMakeLists\\.txt\\'" . cmake-mode))
+	   '(("\\.cmake\\'" . cmake-mode))
+	      auto-mode-alist))
+```
+
 
 
 # 試したいパッケージ等

@@ -72,8 +72,8 @@
 ;;; カーソルの位置が何文字目かを表示する
 (column-number-mode t)
 ;;; 画面の左側に行番号を表示
-(require 'linum)
-(global-linum-mode 1)
+;(require 'linum)
+;(global-linum-mode 1)
 
 ;;; カーソルの位置が何行目かを表示する
 (line-number-mode t)
@@ -149,9 +149,9 @@
 (global-set-key "\C-c\C-r" 'window-resizer)
 
 ;; アクティブウィンドウのサイズを自動調整
-(require 'golden-ratio)
-(golden-ratio-mode 1)
-(add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")
+;(require 'golden-ratio)
+;(golden-ratio-mode 1)
+;(add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")
 
 
 
@@ -198,19 +198,20 @@
         ))
 (yas-global-mode 1)
 
+;; dumb-jump
+(require 'dumb-jump)
+(setq dumb-jump-mode t)
+(setq dumb-jump-use-visible-window nil)
+(define-key global-map [(super d)] 'dumb-jump-go) ;; go-to-definition!
+(define-key global-map [(super shift d)] 'dumb-jump-back)
+
 ;; diff
 ;; コントロール用のバッファを同一フレーム内に表示
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 ;; diffのバッファを上下ではなく左右に並べる
 (setq ediff-split-window-function 'split-window-horizontally)
 
-
-;;;;; Python
-(require 'python-mode)
-;; autopep8
-(require 'py-autopep8)
-(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-;; pyflakes
+;; flymake : コードを動的にチェックしてくれる
 (require 'tramp-cmds)
 (when (load "flymake" t)
   (defun flymake-pyflakes-init ()
@@ -224,12 +225,12 @@
         (list "pyflakes" (list local-file)))))
   (add-to-list 'flymake-allowed-file-name-masks
                '("\\.py\\'" flymake-pyflakes-init)))
- 
-(add-hook 'python-mode-hook
-          (lambda ()
-            (flymake-mode t)))
-
-;;;;; C
+;; エラーをミニバッファに表示
+(defun flymake-show-help ()
+  (when (get-char-property (point) 'flymake-overlay)
+	(let ((help (get-char-property (point) 'help-echo)))
+	  (if help (message "%s" help)))))
+(add-hook 'post-command-hook 'flymake-show-help)
 
 
 ;;;;; markdown
@@ -238,4 +239,46 @@
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+
+;;;;; Python
+(require 'python-mode)
+;; autopep8
+(require 'py-autopep8)
+(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+;; pyflakes
+(add-hook 'python-mode-hook
+          (lambda ()
+            (flymake-mode t)))
+
+
+;;;;; C
+;; Cモード
+(require 'cc-mode)
+(add-hook 'c-mode-common-hook
+		  (lambda ()
+			(setq c-default-style "k&r") ;; カーニハン・リッチースタイル
+			(setq indent-tabs-mode nil)  ;; タブは利用しない
+			(setq c-basic-offset 2)      ;; indent は 2 スペース
+			))
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+;; CMake-mode
+(require 'cmake-mode)
+(setq auto-mode-alist
+	  (append
+	   '(("CMakeLists\\.txt\\'" . cmake-mode))
+	   '(("\\.cmake\\'" . cmake-mode))
+	      auto-mode-alist))
+;; GDB
+;;; 有用なバッファを開くモード
+(setq gdb-many-windows t)
+;;; 変数の上にマウスカーソルを置くと値を表示
+(add-hook 'gdb-mode-hook '(lambda () (gud-tooltip-mode t)))
+;;; I/O バッファを表示
+(setq gdb-use-separate-io-buffer t)
+;;; t にすると mini buffer に値が表示される
+(setq gud-tooltip-echo-area t)
+
+
+
 
