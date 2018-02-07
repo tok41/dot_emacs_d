@@ -72,8 +72,8 @@
 ;;; カーソルの位置が何文字目かを表示する
 (column-number-mode t)
 ;;; 画面の左側に行番号を表示
-;(require 'linum)
-;(global-linum-mode 1)
+(require 'linum)
+(global-linum-mode 1)
 
 ;;; カーソルの位置が何行目かを表示する
 (line-number-mode t)
@@ -177,6 +177,7 @@
 (require 'git-gutter)
 (require 'git-gutter-fringe)
 (global-git-gutter-mode 1)
+(setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
 
 ;; ファイル編集時にbufferを再読込
 (global-auto-revert-mode 1)
