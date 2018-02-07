@@ -56,13 +56,13 @@ hiwin
 ## 行番号を左側に表示
 - built-inされているlinum.elを使う
   - 無い場合は、`M-x package-list-packages`でインストールできると思う
-- M-x linum-mode これで行番号表示のモードになるが、init.elに設定
+- `M-x linum-mode` これで行番号表示のモードになるが、init.elに設定
 ```
 (require 'linum)
 (global-linum-mode 1)
 ```
 - `M-x linum-mode`で表示を消せる
-- emacsの挙動が重たくなる原因の可能性があるので、非表示
+- emacsの挙動が重たくなる原因の可能性があるので、デフォルトで非表示に設定
 
 ## ウィンドウサイズの自動調整（黄金比）
 - 分割ウィンドウのアクティブウィンドウのサイズをちょうどよく変更してくれる
@@ -92,20 +92,20 @@ redo+
   M-x package-list-packages
   git-gutter-fringe
   ```
-  - elファイルは以下の3つのリンクを貼る
-    git-gutter.elc
-    git-gutter-fringe.elc
-    fringe-helper.elc
 - init.el
 ```
 ;; git-gutter 差分の表示
 (require 'git-gutter)
 (require 'git-gutter-fringe)
 (global-git-gutter-mode 1)
+(setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
 
 ;; ファイル編集時にbufferを再読込
 (global-auto-revert-mode 1)
 ```
+- update-hookで更新するイベントを限定している
+  - emacsの挙動の高速化のため
+  - [こちら](http://syohex.hatenablog.com/entry/20130317/1363489739)を参考にした
 
 ## markdown
 - markdown-mode
