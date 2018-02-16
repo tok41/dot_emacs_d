@@ -72,8 +72,8 @@
 ;;; カーソルの位置が何文字目かを表示する
 (column-number-mode t)
 ;;; 画面の左側に行番号を表示
-(require 'linum)
-(global-linum-mode 1)
+;(require 'linum)
+;(global-linum-mode 1)
 
 ;;; カーソルの位置が何行目かを表示する
 (line-number-mode t)
@@ -105,6 +105,7 @@
 (define-key global-map "\C-c;" 'comment-region)      ; コメントアウト
 (define-key global-map "\C-c:" 'uncomment-region)    ; コメント解除
 (define-key global-map "\C-c " 'other-frame)         ; フレーム移動
+;(define-key global-map "\C-]" [prior])         ; ページアップ
 
 ;;; redo
 (require 'redo+)
@@ -174,13 +175,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;; git
 ;; git-gutter 差分の表示
-(require 'git-gutter)
-(require 'git-gutter-fringe)
-(global-git-gutter-mode 1)
-(setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
-
-;; ファイル編集時にbufferを再読込
-(global-auto-revert-mode 1)
+;(require 'git-gutter)
+;(require 'git-gutter-fringe)
+;(global-git-gutter-mode 1)
+;(setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
+;
+;;; ファイル編集時にbufferを再読込
+;(global-auto-revert-mode 1)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -260,7 +261,7 @@
 		  (lambda ()
 			(setq c-default-style "k&r") ;; カーニハン・リッチースタイル
 			(setq indent-tabs-mode nil)  ;; タブは利用しない
-			(setq c-basic-offset 2)      ;; indent は 2 スペース
+			(setq c-basic-offset 4)      ;; indent は 2 スペース
 			))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 ;; CMake-mode
