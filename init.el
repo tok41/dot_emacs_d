@@ -234,6 +234,17 @@
 	  (if help (message "%s" help)))))
 (add-hook 'post-command-hook 'flymake-show-help)
 
+;; コードの折りたたみ
+(add-hook 'c++-mode-hook
+		  '(lambda ()
+			 (hs-minor-mode 1)))
+(add-hook 'c-mode-hook
+		  '(lambda ()
+			 (hs-minor-mode 1)))
+(add-hook 'python-mode-hook
+		  '(lambda ()
+			 (hs-minor-mode 1)))
+(define-key global-map (kbd "C-c /") 'hs-toggle-hiding)
 
 ;;;;; markdown
 (autoload 'markdown-mode "markdown-mode"
