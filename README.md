@@ -267,6 +267,25 @@ cmake-mode
 	      auto-mode-alist))
 ```
 
+## elm-mode
+- Elmの編集モード
+```
+M-x package-list-packages
+elm-mode
+
+# init.el
+(require 'elm-mode)
+```
+
+## dockerfile-mode
+- Dockerfileの編集モード
+```
+M-x package-list-packages
+dockerfile-mode
+
+# init.el
+(require 'dockerfile-mode)
+```
 
 
 # 試したいパッケージ等
@@ -289,5 +308,4 @@ cmake-mode
   - 入力補完
   - companyというパッケージもあるらしい
   - auto-completeは入れてあるが、試したい
-- elm-mode
 

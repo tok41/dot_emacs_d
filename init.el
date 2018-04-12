@@ -253,6 +253,8 @@
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
+;;;;; Dockerfile
+(require 'dockerfile-mode)
 
 ;;;;; Python
 (require 'python-mode)
@@ -292,6 +294,9 @@
 ;;; t にすると mini buffer に値が表示される
 (setq gud-tooltip-echo-area t)
 
+
+;;;;; Elm
+(require 'elm-mode)
 
 
 
