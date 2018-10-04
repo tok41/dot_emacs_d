@@ -1,4 +1,11 @@
 ;; load-path
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (let ((default-directory (expand-file-name "~/.emacs.d/elpa")))
   (add-to-list 'load-path default-directory)
   (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
@@ -66,8 +73,8 @@
 
 ;; 対応する括弧の色の設定
 (setq show-paren-style 'mixed)
-(set-face-background 'show-paren-match-face "grey")
-(set-face-foreground 'show-paren-match-face "black")
+;;(set-face-background 'show-paren-match-face "grey")
+;;(set-face-foreground 'show-paren-match-face "black")
 
 ;;; カーソルの位置が何文字目かを表示する
 (column-number-mode t)

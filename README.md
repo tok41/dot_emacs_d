@@ -6,7 +6,21 @@
   - 最初に見つかった設定ファイルが反映される
 - ここではgitでディレクトリ毎管理すると楽なので、`~/.emacs.d/init.el`を作成
 
-# 設定
+
+# 導入手順
+- ~/.emacs.dとしてリポジトリをcloneする
+```
+$ git clone https://github.com/tok41/dot_emacs_d ~/.emacs.d
+$ cd ~/.emacs.d
+```
+- ライブラリファイルの配置先ディレクトリを作成
+```
+$ mkdir elpa
+```
+- 以下の個別設定の項目を参照し、ライブラリをインストールする
+
+
+# 個別設定
 ## load-path
 - 指定ディレクトリ以下のサブディレクトリにパスを通す
 ```
@@ -76,6 +90,8 @@ golden-ratio
 ## redo
 - redo+をインストール
   - キーバインドは`Ctrl+z`とした
+- packagesからinstallできなくなっているらしいので以下のURLからelファイルを直接ダウンロードする
+  - http://www.emacswiki.org/emacs/redo%2B.el
 ```
 M-x package-list-packages
 redo+
