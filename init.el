@@ -25,8 +25,10 @@
 ;;Japanese
 ;(require 'mozc)
 (set-language-environment "Japanese")
-(setq default-input-method "japanese-mozc")
+;(setq default-input-method "japanese-mozc")
 (prefer-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;; 見た目の設定
