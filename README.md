@@ -166,6 +166,7 @@ python-mode
   ```
   - init.elに以下の設定
   - elpa以下にsnippetsコレクションが入るので、パスを通す
+	- versionの問題か、elpa以下に直接snippetsディレクトリが作られないことがあるので、yasnippet-snippets-*の下のsnippetsディレクトリのリンクを貼る
   ```
   (require 'yasnippet)
   (setq yas-snippet-dirs
