@@ -13,10 +13,11 @@
 
 ;; setting of package.el
 (require 'package)
-(add-to-list 'package-archives
-	     '("melpa" . "http://melpa.milkbox.net/packages/"))
-(add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages/"))
+;(add-to-list 'package-archives
+;	     '("melpa" . "http://melpa.milkbox.net/packages/"))
+;(add-to-list 'package-archives
+;	     '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (fset 'package-desc-vers 'package--ac-desc-version)
 ;(package-initialise)
 
@@ -117,8 +118,8 @@
 ;(define-key global-map "\C-]" [prior])         ; ページアップ
 
 ;;; redo
-(require 'redo+)
-(global-set-key (kbd "C-z") 'redo)
+;(require 'redo+)
+;(global-set-key (kbd "C-z") 'redo)
 
 ;;;;; 分割ウィンドウを矢印キーで移動する
 (windmove-default-keybindings) ; 引数なしの場合は Shift
@@ -156,7 +157,7 @@
               (t
                (message "Quit")
                (throw 'end-flag t)))))))
-(global-set-key "\C-c\C-r" 'window-resizer)
+(global-set-key "\C-c\C-y" 'window-resizer)
 
 ;; アクティブウィンドウのサイズを自動調整
 ;(require 'golden-ratio)
